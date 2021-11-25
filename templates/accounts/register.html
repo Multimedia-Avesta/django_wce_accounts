@@ -1,0 +1,64 @@
+{% extends 'accounts/account_management_base.html' %}
+
+{% block head %}
+  {{ block.super }}
+
+  <title>ITSEE Account Creation</title>
+{% endblock %}
+
+{% block header %}
+  <header role="banner" id="header">
+    <h1 id="page_title">ITSEE Account Creation</h1>
+  </header>
+{% endblock %}
+
+
+{% block container %}
+  {% if validlink == True %}
+    <main role="main" id="container">
+      <p>To complete the registration process please provide the following details and set a password.<p>
+      <p>You will then be able to login using your email address which is currently set to <b>{{ email }}</b>. Please note that this is case sensitive.</p>
+      <p>Once your registration is complete you can change your email address at any time from the profile
+      page by logging in and clicking on your email address in the top right corner of any page.</p>
+      <p class="important">All fields must be completed.</p>
+      <form method="post">
+        {% csrf_token %}
+        {% for field in form %}
+          {% if field.name == 'full_name' %}
+            <br/>
+            <label for="id_full_name">Full name:</label>
+            <br/>
+            {{ field }}
+            <br/>
+          {% else %}
+            {% if field.name != 'confirm_privacy' %}
+              <br/>
+              {{ field.label_tag }}
+              <br/>
+              {{ field }}
+              <span class="help">{{ field.help_text }}</span>
+              <br/>
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+        {% for field in form %}
+          {% if field.name == 'confirm_privacy' %}
+            <br/>
+            {{field}}
+            <a target="_blank" href="{% url 'privacy_statement' %}">I have read and agreed to the Privacy Policy</a>
+          {% endif %}
+        {% endfor %}
+        <br/>
+        <br/>
+        <button type="submit" class="btn">Confirm Registration</button>
+      </form>
+    </main>
+  {% else %}
+    <main role="main" id="container">
+      <p>This link has expired.</p>
+      <p>Please try logging in on the <a href="{% url 'login' %}">log in page</a></p>
+      <p>If you have not yet created your account please reply to the email we sent containing this link and we will arrange for another link to be sent.</p>
+    </main>
+  {% endif %}
+
+{% endblock %}

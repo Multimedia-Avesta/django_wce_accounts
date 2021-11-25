@@ -1,0 +1,15 @@
+{% load i18n %}{% autoescape off %}
+{% blocktrans %}You are receiving this email because you have requested access to the digital tools provided by the MUYA project and we have created an account for you.{% endblocktrans %}
+
+{% trans "Please go to the following page to complete your profile and choose a password:" %} {% block reset_link %} {{ protocol }}://{{ domain }}{% url 'create_account' uidb64=uid token=token %} {% endblock %}
+
+{% trans "Your username will be the same as your email, which is currently:" %} {{ user.get_username }}
+{% trans "You can change your email address on the account profile page once you have set your password." %}
+
+{% trans "Please read the privacy policy at" %} {{ protocol }}://{{ domain }}{% url 'privacy_statement' %}
+
+{% blocktrans %}If you have received this email in error or no longer require access to our tools please contact us to let us know at itsee@contacts.bham.ac.uk and then delete the email.{% endblocktrans %}
+
+{% blocktrans %}If you have any questions you can contact us at itsee@contacts.bham.ac.uk.{% endblocktrans %}
+
+{% blocktrans %}The MUYA team{% endblocktrans %} {% endautoescape %}

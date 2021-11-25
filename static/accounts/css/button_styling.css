@@ -1,0 +1,73 @@
+/* AN attempt at fully accessible buttons based on https://fvsch.com/styling-buttons
+/*
+/* TODO: js-focus-visible needs adding and then the appropriate things below need uncommenting*/
+/**
+* Reset button styles
+*/
+button, input[type="submit"], input[type="file"] {
+  padding: 0;
+  border: none;
+  font: inherit;
+  color: inherit;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.btn, input[type="submit"].btn, input[type="file"].btn {
+  /* default for <button>, but useful for <a> */
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+
+  /* create a small space when buttons wrap on 2 lines */
+  margin: 2px 0;
+
+  /* invisible border (will be colored on hover/focus) */
+  border: solid 1px lightgrey;/*transparent;*/
+  border-radius: 4px;
+
+  /* size comes from text & padding (no width/height) */
+  padding: 0.5em 1em;
+
+  /* make sure colors have enough contrast! */
+  color: black;/*#ffffff;*/
+  background-color: whitesmoke; /*#9555af;*/
+
+
+  outline: none;
+}
+
+/* Firefox: removes the inner border shown on focus */
+.btn::-moz-focus-inner, input[type="submit"].btn::-moz-focus-inner, input[type="file"].btn::-moz-focus-inner {
+  border: none;
+}
+
+.btn:active, input[type="submit"].btn:active, input[type="file"].btn:active {
+  transform: translateY(1px);
+  filter: saturate(150%);
+}
+
+/* inverse colors on hover */
+.btn:hover, input[type="submit"].btn:hover, input[type="file"].btn:hover {
+  color: black;
+  border-color: gainsboro;
+  box-shadow: 1px 1px silver;
+  background-color: whitesmoke;
+}
+
+/*TODO: once we have js-focus-visible in place this can be put back in for accesibility */
+/* make sure we have a visible focus ring */
+/* .btn:focus, input[type="submit"].btn:focus, input[type="file"].btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 105, 180, 0.5),
+    0 0 0 1.5px rgba(255, 105, 180, 0.5);
+} */
+
+/* hide focus style if not from keyboard navigation */
+/* .js-focus-visible .btn:focus:not(.focus-visible),
+ .js-focus-visible input[type="submit"].btn:focus:not(.focus-visible),
+  .js-focus-visible input[type="file"].btn:focus:not(.focus-visible) {
+  box-shadow: none;
+}  */
+
+/** End of button/link styling */

@@ -1,0 +1,48 @@
+{% extends "accounts/account_management_base.html" %}
+
+{% block head %}
+  {{ block.super }}
+  <title>Edit Account Details</title>
+{% endblock %}
+
+{% block header %}
+  <header role="banner" id="header">
+    <h1 id="page_title">Edit Account Details</h1>
+  </header>
+{% endblock %}
+
+
+{% block container %}
+  <main role="main" id="container">
+
+  <form method="POST">
+    {% csrf_token %}
+    <input type="hidden" id="back_url" name="back_url" value="{{ back_url }}"/>
+    {% for field in form %}
+      {% if field.name == 'full_name' %}
+        <br/>
+        <label for="id_full_name">Full name:</label>
+        <br/>
+        {{ field }}
+        <br/>
+      {% else %}
+        {% if field.name != 'password' %}
+          <br/>
+          {{ field.label_tag }}
+          <br/>
+          {{ field }}
+          {{ field.help_text }}
+          <br/>
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+    <br/>
+    You cannot reset you password with this form. To reset your password please use the <a href="/accounts/password_change?back={{ back_url }}">password change form</a>.
+    <br/>
+    <p><a href="/accounts/privacy">Privacy Policy</a></p>
+    <input type="submit" value="Save" class="btn">
+    <input type="button" id="back_button" class="btn" value="Back"/>
+  </form>
+
+  </main>
+{% endblock %}
