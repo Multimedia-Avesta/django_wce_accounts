@@ -8,8 +8,8 @@
 
 {% trans "Please read the privacy policy at" %} {{ protocol }}://{{ domain }}{% url 'privacy_statement' %}
 
-{% blocktrans %}If you have received this email in error or no longer require access to our tools please contact us to let us know at itsee@contacts.bham.ac.uk and then delete the email.{% endblocktrans %}
+{% blocktrans %}If you have received this email in error or no longer require access to our tools please contact us to let us know at {{ contact_email }} and then delete the email.{% endblocktrans %}
 
-{% blocktrans %}If you have any questions you can contact us at itsee@contacts.bham.ac.uk.{% endblocktrans %}
+{% blocktrans %}If you have any questions you can contact us at {{ contact_email }}.{% endblocktrans %}
 
 {% blocktrans %}The MUYA team{% endblocktrans %} {% endautoescape %}

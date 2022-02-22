@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views import generic
 from django.http import HttpResponseRedirect
+from django.conf import settings as django_settings
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -104,9 +105,10 @@ class AccountPasswordChangeDoneView(PasswordChangeDoneView):
 
 class AccountPasswordResetView(PasswordResetView):
     email_template_name = 'accounts/password_reset_email.html'
-    from_email = 'itsee@contacts.bham.ac.uk'
+    from_email = django_settings.DEFAULT_FROM_EMAIL
     subject_template_name = 'accounts/password_reset_subject.txt'
     template_name = 'accounts/password_reset_form.html'
+    extra_email_context = {'contact_email': django_settings.CONTACT_EMAIL}
 
 
 class AccountPasswordResetDoneView(PasswordResetDoneView):

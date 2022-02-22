@@ -39,11 +39,12 @@ class CustomUserAdmin(UserAdmin):
             reset_form.save(
                 request=request,
                 use_https=request.is_secure(),
-                from_email='itsee@contacts.bham.ac.uk',
+                from_email=settings.DEFAULT_FROM_EMAIL,
                 subject_template_name=join(settings.BASE_DIR,
                                            'accounts/templates/accounts/account_creation_subject.txt'),
                 email_template_name=join(settings.BASE_DIR,
                                          'accounts/templates/accounts/account_creation_email.html'),
+                extra_email_context={'contact_email': settings.CONTACT_EMAIL},
             )
 
 
